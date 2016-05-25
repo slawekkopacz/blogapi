@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/slawekkopacz/blogapi#readme",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "mocha": "^2.5.3",
+    "mongoose": "^4.4.19"
   },
   "devDependencies": {
-    "mocha": "^2.5.1",
-    "mongoose": "^4.4.19",
     "should": "^8.4.0",
     "supertest": "^1.2.0"
   }
