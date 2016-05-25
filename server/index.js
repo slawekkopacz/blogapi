@@ -1,4 +1,5 @@
 ﻿var express = require('express');
+var router = require('./../router');
 
 module.exports = {
   create: create,
@@ -6,10 +7,6 @@ module.exports = {
 
 function create() {
   var app = express();
-
-  app.get('/', function (req, res) {
-    res.send('Hello World!');
-  });
-
+  app.use(router);
   return app;
 }
