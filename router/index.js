@@ -1,15 +1,14 @@
 ﻿var express = require('express');
-var postsRouter = require('./posts');
 
-var router = express.Router();
+module.exports = function (postRouter) {
+  var router = express.Router();
 
-router.get('/', getRoot);
-router.use(postsRouter);
+  router.get('/', getRoot);
+  router.use(postRouter);
 
+  function getRoot(req, res) {
+    res.send('Hello World!');
+  }
 
-function getRoot(req, res) {
-  res.send('Hello World!');
+  return router;
 }
-
-
-module.exports = router;
