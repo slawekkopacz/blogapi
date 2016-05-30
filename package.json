@@ -20,7 +20,8 @@
   "dependencies": {
     "express": "^4.13.4",
     "mocha": "^2.5.3",
-    "mongoose": "^4.4.19"
+    "mongoose": "^4.4.19",
+    "pug": "^2.0.0-alpha8"
   },
   "devDependencies": {
     "should": "^8.4.0",

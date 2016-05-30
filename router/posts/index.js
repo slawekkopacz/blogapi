@@ -1,31 +1,42 @@
 ﻿var express = require('express');
+var config = require('./../../config');
+var mongoose = require('mongoose');
 
 module.exports = function (postService) {
 
-  var router = express.Router();
+  var router = express.Router({ mergeParams: true });
 
-  router.get('/posts', getPostList);
-  router.get('/posts/:id', getPost);
-
-
-  function getPostList(req, res) {
+  function getPostList(req, res, next) {
     postService.getAll(function (err, posts) {
       if (err) {
-        handleError(err, res);
+        next(err, req, res, next);
       }
 
-      res.send(posts);
+      res.locals.view = 'posts/posts'
+      res.locals.data = posts;
+      next();
     });
   }
 
-  function getPost(req, res) {
-    res.send('Post id: ' + req.params.id);
+  function getPost(req, res, next) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      res.status(404);
+      next();
+    }
+
+    postService.getById(req.params.id.toString(), function (err, post) {
+      if (err) {
+        next(err, req, res, next);
+      }
+
+      res.locals.view = 'posts/post'
+      res.locals.data = post;
+      next();
+    });
   }
 
-  function handleError(err, res) {
-    console.error(err);
-    res.status(500).send('Error 500 message');
-  }
+  router.get('/posts', getPostList);
+  router.get('/posts/:id', getPost);
 
   return router;
 }

@@ -11,5 +11,6 @@ module.exports = {
 function create() {
   var app = express();
   app.use(router);
+  app.set('view engine', 'pug');
   return app;
 }

@@ -9,8 +9,26 @@
     });
   }
 
+  function getById(id, callback) {
+    findOne({ _id: id }, function (err, result) {
+      if (err) {
+        return callback(err);
+      }
+      callback(null, result);
+    });
+  }
+
   function find(filter, callback) {
     Model.find(filter).exec(function (err, result) {
+      if (err) {
+        return callback(err);
+      }
+      callback(null, result);
+    });
+  }
+
+  function findOne(filter, callback) {
+    Model.findOne(filter).exec(function (err, result) {
       if (err) {
         return callback(err);
       }
@@ -30,6 +48,7 @@
 
   return {
     getAll: getAll,
+    getById: getById,
     find: find,
     save: save,
   }
