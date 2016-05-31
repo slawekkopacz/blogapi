@@ -1,4 +1,5 @@
 ﻿var express = require('express');
+var HTTPStatus = require('http-status');
 
 module.exports = function (postRouter) {
   var router = express.Router({ mergeParams: true });
@@ -21,7 +22,7 @@ module.exports = function (postRouter) {
         res.send(res.locals.data);
       },
       'default': function () {
-        res.status(406).send('Not Acceptable');
+        res.status(HTTPStatus.NOT_ACCEPTABLE).send('Not Acceptable');
       }
     });
   };
@@ -31,8 +32,8 @@ module.exports = function (postRouter) {
   router.use(postRouter);
 
   router.use(function endRequest(req, res) {
-    if (!res.locals.data || res.status === 404) {
-      res.status(404)
+    if (!res.locals.data || res.status === HTTPStatus.NOT_FOUND) {
+      res.status(HTTPStatus.NOT_FOUND)
       res.locals.view = '404';
       res.locals.data = { message: 'Not Found' };
     }
@@ -43,9 +44,9 @@ module.exports = function (postRouter) {
   router.use(function handleError(err, req, res, next) {
     console.error(err.stack)
 
-    res.status(500);
+    res.status(HTTPStatus.INTERNAL_SERVER_ERROR);
     res.locals.view = '500';
-    res.locals.data = { message: 'Internal Error' }
+    res.locals.data = { message: 'Internal Server Error' }
 
     respond(req, res);
   })

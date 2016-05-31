@@ -13,7 +13,7 @@ describe('server', function () {
   it('GET / should return Hello World!', function (done) {
     request(blogapiServer)
       .get('/')
-      .expect('Hello World!')
+      .expect({ message: 'Hello World!' })
       .expect(200, done);
   });
 });

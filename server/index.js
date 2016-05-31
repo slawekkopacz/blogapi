@@ -1,8 +1,9 @@
 ﻿var express = require('express');
 var Post = require('./../models').Post;
 var postService = require('./../services/service.js')(Post);
-var postRouter = require('./../router/posts')(postService);
-var router = require('./../router')(postRouter);
+var postController = require('./../controllers/post.js')(postService);
+var postRouter = require('./../routers/post')(postController);
+var router = require('./../routers')(postRouter);
 
 module.exports = {
   create: create,

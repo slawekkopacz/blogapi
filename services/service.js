@@ -49,7 +49,7 @@
   return {
     getAll: getAll,
     getById: getById,
-    find: find,
     save: save,
+    isValidModelId: id => Model.isValidId(id),
   }
 }
