@@ -18,7 +18,7 @@ describe('postService', function () {
       var post = {
         title: 'Testy test',
         body: 'Bodie talk',
-        postedDate: new Date(2016, 05, 27, 23, 59, 45),
+        postedDate: new Date(2016, 5, 27, 23, 59, 45),
       }
 
       postService.save(post, function (err, savedPost) {
@@ -119,7 +119,7 @@ function insertOnePostDocument(doc, callback) {
   var post = doc || {
     title: 'Testy test',
     body: 'Bodie talk',
-    postedDate: new Date(2016, 05, 27, 23, 59, 45),
+    postedDate: new Date(2016, 5, 27, 23, 59, 45),
   }
 
   postService.save(post, function (err, savedPost) {

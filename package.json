@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/server/*.js tests/services/*.js",
+    "test": "gulp mocha",
+    "lint": "gulp lint",
     "setup-dev": "node setup/exec.js"
   },
   "repository": {
@@ -25,6 +26,14 @@
     "pug": "^2.0.0-alpha8"
   },
   "devDependencies": {
+    "babel-eslint": "^6.0.4",
+    "gulp": "^3.9.1",
+    "gulp-env": "^0.4.0",
+    "gulp-eslint": "^2.0.0",
+    "gulp-load-plugins": "^1.2.4",
+    "gulp-mocha": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-util": "^3.0.7",
     "should": "^8.4.0",
     "supertest": "^1.2.0"
   }
