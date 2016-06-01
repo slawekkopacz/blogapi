@@ -7,6 +7,9 @@
   server: {
     port: 3000,
   },
+  log: {
+    filepath: './blogapi-logfile.log',
+  },
   test: {
     db: {
       name: 'blogapi-test',

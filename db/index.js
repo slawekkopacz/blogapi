@@ -1,18 +1,19 @@
 ﻿var mongoose = require('mongoose');
+var log = require('./../utils/log');
 
 module.exports = function connect(dbConnectionString) {
 
   mongoose.connect(dbConnectionString);
 
   mongoose.connection.on('connected', function () {
-    console.log('Mongoose connection opened.');
+    log.info('Mongoose connection opened.');
   });
 
   mongoose.connection.on('error', function (err) {
-    console.log('Mongoose connection error: ' + err);
+    log.error('Mongoose connection error: ' + err);
   });
 
   mongoose.connection.on('disconnected', function () {
-    console.log('Mongoose connection disconnected.');
+    log.error('Mongoose connection disconnected.');
   });
 }

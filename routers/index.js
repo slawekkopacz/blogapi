@@ -1,5 +1,6 @@
 ﻿var express = require('express');
 var HTTPStatus = require('http-status');
+var log = require('./../utils/log');
 
 module.exports = function (postRouter) {
   var router = express.Router({ mergeParams: true });
@@ -42,7 +43,7 @@ module.exports = function (postRouter) {
   })
 
   router.use(function handleError(err, req, res, next) {
-    console.error(err.stack)
+    log.error(err.stack)
 
     res.status(HTTPStatus.INTERNAL_SERVER_ERROR);
     res.locals.view = '500';
