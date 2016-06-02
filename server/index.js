@@ -3,7 +3,7 @@ var logger = require('morgan');
 var Post = require('./../models').Post;
 var postService = require('./../services/service.js')(Post);
 var postController = require('./../controllers/post.js')(postService);
-var postRouter = require('./../routers/post')(postController);
+var postRouter = require('./../routers/post.js')(postController);
 var router = require('./../routers')(postRouter);
 
 module.exports = {

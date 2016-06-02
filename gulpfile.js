@@ -33,7 +33,8 @@ gulp.task('mocha', ['set-env-test'], () => {
     .pipe(plugins.mocha({
       reporter: plugins.util.env['mocha-reporter'] || 'spec',
     }))
-    .once('error', () => {
+    .once('error', (err) => {
+      plugins.util.log(err);
       process.exit(1);
     })
     .once('end', () => {

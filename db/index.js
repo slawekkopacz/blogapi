@@ -1,5 +1,5 @@
 ﻿var mongoose = require('mongoose');
-var log = require('./../utils/log');
+var log = require('./../utils/log.js');
 
 module.exports = function connect(dbConnectionString) {
 

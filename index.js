@@ -1,4 +1,4 @@
-﻿var log = require('./utils/log');
+﻿var log = require('./utils/log.js');
 var config = require('./config');
 var db = require('./db')(config.db.connString);
 var server = require('./server');

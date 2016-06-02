@@ -1,6 +1,6 @@
 ﻿var express = require('express');
 var HTTPStatus = require('http-status');
-var log = require('./../utils/log');
+var log = require('./../utils/log.js');
 
 module.exports = function (postRouter) {
   var router = express.Router({ mergeParams: true });
