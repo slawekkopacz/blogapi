@@ -1,12 +1,12 @@
 ﻿var mongoose = require('mongoose');
-var HTTPStatus = require('http-status');
+var httpStatus = require('http-status');
 
 module.exports = function (postService) {
 
   return {
-    getPostList: getPostList,
-    getPost: getPost,
-  }
+    getPostList,
+    getPost,
+  };
 
   function getPostList(req, res, next) {
     postService.getAll(function (err, posts) {
@@ -37,7 +37,7 @@ module.exports = function (postService) {
 
   function validateModelId(id, res, next) {
     if (!postService.isValidModelId(id)) {
-      res.status(HTTPStatus.NOT_FOUND);
+      res.status(httpStatus.NOT_FOUND);
       next();
     }
   }

@@ -1,5 +1,12 @@
 ﻿module.exports = function (Model) {
 
+  return {
+    getAll,
+    getById,
+    save,
+    isValidModelId: id => Model.isValidId(id),
+  }
+
   function getAll(callback) {
     find({}, function (err, result) {
       if (err) {
@@ -44,12 +51,5 @@
       }
       callback(null, savedDocument);
     });
-  }
-
-  return {
-    getAll: getAll,
-    getById: getById,
-    save: save,
-    isValidModelId: id => Model.isValidId(id),
   }
 }

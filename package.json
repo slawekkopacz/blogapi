@@ -6,7 +6,7 @@
   "scripts": {
     "test": "gulp mocha",
     "lint": "gulp lint",
-    "setup-dev": "node setup/exec.js"
+    "setup-dev": "gulp setup-dev"
   },
   "repository": {
     "type": "git",

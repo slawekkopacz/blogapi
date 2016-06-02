@@ -1,11 +1,11 @@
 ﻿var should = require('should');
+var mongoose = require('mongoose');
+var async = require('async');
+var assert = require('assert');
 var config = require('./../../config');
 var db = require('./../../db')(config.test.db.connString);
 var Post = require('./../../models').Post;
 var postService = require('./../../services/service.js')(Post);
-var mongoose = require('mongoose');
-var async = require('async');
-var assert = require('assert');
 
 describe('postService', function () {
 

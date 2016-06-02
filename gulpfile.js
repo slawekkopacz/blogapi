@@ -27,7 +27,6 @@ gulp.task('set-env-test', () => {
 
 gulp.task('mocha', ['set-env-test'], () => {
 
-  var exitCode = 0;
   return gulp.src(paths.tests, { read: false })
     .pipe(plugins.plumber())
     .pipe(plugins.mocha({
@@ -38,8 +37,12 @@ gulp.task('mocha', ['set-env-test'], () => {
       process.exit(1);
     })
     .once('end', () => {
-      process.exit();
+      process.exit(0);
     });
+});
+
+gulp.task('setup-dev', () => {
+  return require('./setup/import');
 });
 
 
