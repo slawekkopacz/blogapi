@@ -1,8 +1,9 @@
 ﻿var should = require('should');
 var request = require('supertest');
+var httpStatus = require('http-status');
 var server = require('../../server');
 
-describe('server', () => {
+describe('server (general)', () => {
 
   var blogapiServer;
 
@@ -14,7 +15,8 @@ describe('server', () => {
     request(blogapiServer)
       .get('/')
       .accept('json')
-      .expect(200)
+
+      .expect(httpStatus.OK)
       .expect('Content-Type', /json/)
       .end(done);
   });
@@ -23,7 +25,8 @@ describe('server', () => {
     request(blogapiServer)
       .get('/')
       .accept('html')
-      .expect(200)
+
+      .expect(httpStatus.OK)
       .expect('Content-Type', /html/)
       .end(done);
   });
@@ -32,7 +35,8 @@ describe('server', () => {
     request(blogapiServer)
       .get('/')
       .accept('html')
-      .expect(200)
+
+      .expect(httpStatus.OK)
       .expect('Content-Type', /html/)
       .end(done);
   });
@@ -41,7 +45,8 @@ describe('server', () => {
     request(blogapiServer)
       .get('/')
       .accept('html')
-      .expect(200)
+
+      .expect(httpStatus.OK)
       .expect('Content-Type', /html/)
       .end(done);
   });
@@ -50,7 +55,8 @@ describe('server', () => {
     request(blogapiServer)
       .get('/')
       .accept('json')
-      .expect(200)
+
+      .expect(httpStatus.OK)
       .expect('Content-Type', /json/)
       .expect({ message: 'Hello World!' })
       .end(done);
@@ -59,6 +65,7 @@ describe('server', () => {
   it('GET /unknown should return 404 (Not Found)', done => {
     request(blogapiServer)
       .get('/unknown')
-      .expect(404, done);
+
+      .expect(httpStatus.NOT_FOUND, done);
   });
 });

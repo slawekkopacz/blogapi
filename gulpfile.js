@@ -20,7 +20,10 @@ gulp.task('lint', () => {
 gulp.task('set-env-test', () => {
   plugins.env({
     vars: {
-      NODE_ENV: 'test'
+      NODE_ENV: 'test',
+      //https_proxy: 'http://127.0.0.1:8888',
+      //http_proxy: 'http://127.0.0.1:8888',
+      //NODE_TLS_REJECT_UNAUTHORIZED: '0',
     }
   });
 });

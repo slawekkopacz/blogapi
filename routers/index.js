@@ -8,23 +8,15 @@ module.exports = function (postRouter) {
   function getRoot(req, res, next) {
     res.locals.view = 'index';
     res.locals.data = { message: "Hello World!" };
-    next();
+    return next();
   }
 
   function respond(req, res, next) {
     res.format({
-      json: function () {
-        res.json(res.locals.data);
-      },
-      html: function () {
-        res.render(res.locals.view, res.locals.data);
-      },
-      text: function () {
-        res.send(res.locals.data);
-      },
-      'default': function () {
-        res.status(httpStatus.NOT_ACCEPTABLE).send('Not Acceptable');
-      }
+      json: () => res.json(res.locals.data),
+      html: () => res.render(res.locals.view, res.locals.data),
+      text: () => res.send(res.locals.data),
+      'default': () => res.status(httpStatus.NOT_ACCEPTABLE).send('Not Acceptable'),
     });
   };
 
@@ -33,7 +25,15 @@ module.exports = function (postRouter) {
   router.use(postRouter);
 
   router.use(function endRequest(req, res) {
-    if (!res.locals.data || res.status === httpStatus.NOT_FOUND) {
+
+    let isBadRequest = res.statusCode === httpStatus.BAD_REQUEST;
+    let isNotFound = !res.locals.data || res.statusCode === httpStatus.NOT_FOUND;
+
+    if (isBadRequest) {
+      res.status(httpStatus.BAD_REQUEST);
+      res.locals.data = { message: 'Bad Request' };
+      //TODO view?
+    } else if (isNotFound) {
       res.status(httpStatus.NOT_FOUND)
       res.locals.view = '404';
       res.locals.data = { message: 'Not Found' };

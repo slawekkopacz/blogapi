@@ -5,7 +5,8 @@ module.exports = function (postController) {
   var router = express.Router();
 
   router.route('/posts')
-    .get(postController.getPostList);
+    .get(postController.getPostList)
+    .post(postController.createPost);
 
   router.route('/posts/:id')
     .get(postController.getPost);

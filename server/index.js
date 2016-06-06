@@ -1,5 +1,6 @@
 ﻿var express = require('express');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 var Post = require('./../models').Post;
 var postService = require('./../services/service.js')(Post);
 var postController = require('./../controllers/post.js')(postService);
@@ -19,6 +20,7 @@ function create() {
     }
   }));
 
+  app.use(bodyParser.json({ limit: '10mb' }))
   app.use(router);
   app.set('view engine', 'pug');
   return app;

@@ -8,11 +8,11 @@
   }
 
   function getAll(callback) {
-    find({}, function (err, result) {
+    find({}, function (err, posts) {
       if (err) {
         return callback(err);
       }
-      callback(null, result);
+      callback(null, posts);
     });
   }
 
