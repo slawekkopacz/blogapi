@@ -52,7 +52,13 @@ module.exports = function (postService) {
       }
 
       res.locals.data = savedPost.toResponseObject();
+      res.location(getLocationBase(req, res.locals.data.id));
+      res.status(httpStatus.CREATED);
       return next();
     });
+  }
+
+  function getLocationBase(req, id) {
+    return `${req.protocol}://${req.get('Host')}${req.url}/${id}`;
   }
 }

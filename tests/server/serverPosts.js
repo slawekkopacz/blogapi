@@ -92,16 +92,18 @@ describe('server (/posts)', () => {
         .end(done);
     });
 
-    it('POST /posts should create new post and return it', done => {
-      request(blogapiServer)
-        .post('/posts')
-        .type('json')
-        .accept('json')
-        .send({ title: 'Super Post' })
+    it('POST /posts should create new post and return (201) Created status, '
+      + 'uri in Location header and crated post in body', done => {
+        request(blogapiServer).post('/posts')
+          .type('json')
+          .accept('json')
+          .send({ title: 'Super Post' })
 
-        .expect(httpStatus.OK)
-        .expect('Content-Type', /json/)
-        .expect(res => res.body.title.should.equal('Super Post'))
+          .expect(httpStatus.CREATED)
+          .expect('Content-Type', /json/)
+            .expect(res => res.headers.location.should
+              .match(new RegExp(`http:\/\/127\.0\.0\.1:\\d{4,}\/posts\/${res.body.id}`)))
+          .expect(res => res.body.title.should.equal('Super Post'))
         .end(done);
     });
 
