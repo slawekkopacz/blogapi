@@ -1,6 +1,7 @@
 ﻿var mongoose = require('mongoose');
 var httpStatus = require('http-status');
 var _ = require('lodash');
+var helper = require('./helper.js');
 
 module.exports = function (postService) {
 
@@ -45,20 +46,23 @@ module.exports = function (postService) {
       res.status(httpStatus.BAD_REQUEST);
       return next();
     }
-    // todo validate beofre?
+
     postService.save(req.body, (err, savedPost) => {
       if (err) {
+        if (helper.isValidationError(err)) {
+          res.status(httpStatus.BAD_REQUEST);
+          res.locals.errorMessage = helper.getValidationErrorMessage(err);
+          return next();
+        }
         return next(err, req, res, next);
       }
 
       res.locals.data = savedPost.toResponseObject();
-      res.location(getLocationBase(req, res.locals.data.id));
+      res.location(helper.getLocationBase(req, res.locals.data.id));
       res.status(httpStatus.CREATED);
       return next();
     });
   }
 
-  function getLocationBase(req, id) {
-    return `${req.protocol}://${req.get('Host')}${req.url}/${id}`;
-  }
+
 }

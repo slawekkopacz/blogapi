@@ -31,7 +31,7 @@ module.exports = function (postRouter) {
 
     if (isBadRequest) {
       res.status(httpStatus.BAD_REQUEST);
-      res.locals.data = { message: 'Bad Request' };
+      res.locals.data = { message: `Bad Request. ${res.locals.errorMessage}` };
       //TODO view?
     } else if (isNotFound) {
       res.status(httpStatus.NOT_FOUND)

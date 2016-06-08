@@ -2,8 +2,14 @@
 
 var postSchema = new mongoose.Schema({
   //_id: mongoose.Types.ObjectId,
-  title: String,
-  body: String,
+  title: {
+    type: String,
+    required: true,
+  },
+  body: {
+    type: String,
+    required: true,
+  },
   postedDate: Date,
 });
 

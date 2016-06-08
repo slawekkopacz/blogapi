@@ -32,7 +32,10 @@ describe('server (/posts)', () => {
 
     it('GET /posts should return array of lenght 1 if only one post exists', done => {
       async.series([
-        cb => insertPostDocument({ title: 'Super Post' }, cb),
+        cb => insertPostDocument({
+          title: 'Super Post',
+          body: '<p>Body</p>',
+        }, cb),
 
         cb => request(blogapiServer)
           .get('/posts')
@@ -97,7 +100,10 @@ describe('server (/posts)', () => {
         request(blogapiServer).post('/posts')
           .type('json')
           .accept('json')
-          .send({ title: 'Super Post' })
+          .send({
+            title: 'Super Post',
+            body: '<p>Super Body</p>',
+          })
 
           .expect(httpStatus.CREATED)
           .expect('Content-Type', /json/)
@@ -129,12 +135,23 @@ describe('server (/posts)', () => {
         .end(done);
     });
 
-    it('POST /posts should return 400 (Bad Request) if body is invalid', done => {
+    it('POST /posts should return 400 (Bad Request) if body is not valid json', done => {
       request(blogapiServer)
         .post('/posts')
         .type('json')
         .accept('json')
         .send(`invalid (json) body`)
+
+        .expect(httpStatus.BAD_REQUEST)
+        .end(done);
+    });
+
+    it('POST /posts should return 400 (Bad Request) if validation fails', done => {
+      request(blogapiServer)
+        .post('/posts')
+        .type('json')
+        .accept('json')
+        .send({ title: 'Body is missing.' })
 
         .expect(httpStatus.BAD_REQUEST)
         .end(done);
