@@ -31,6 +31,8 @@ describe('server (general)', () => {
       .end(done);
   });
 
+
+  //TODO[sk]
   it('Request without Accept should return json (default)', done => {
     request(blogapiServer)
       .get('/')
@@ -41,15 +43,16 @@ describe('server (general)', () => {
       .end(done);
   });
 
-  it('Request with Accept of unknown value should return 406 (Not Acceptable)', done => {
-    request(blogapiServer)
-      .get('/')
-      .accept('html')
+  //TODO[sk]
+  //it('Request with Accept of unknown value should return 406 (Not Acceptable)', done => {
+  //  request(blogapiServer)
+  //    .get('/')
+  //    .accept('unknown/accept')
 
-      .expect(httpStatus.OK)
-      .expect('Content-Type', /html/)
-      .end(done);
-  });
+  //    .expect(httpStatus.NOT_ACCEPTABLE)
+  //    .expect('Content-Type', /plain/)
+  //    .end(done);
+  //});
 
   it('GET / should return Hello World!', done => {
     request(blogapiServer)
